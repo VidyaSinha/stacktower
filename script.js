@@ -1,3 +1,128 @@
+'use strict';
+function color(r, g, b)
+  {
+    this.r=r; this.g=g; this.b=b;
+    this.toString = function()
+    {
+      return `rgb(${this.r}, ${this.g}, ${this.b})`;
+    }
+    this.darken=function(darken_by)
+    {
+      
+      if(this.r>this.g&&this.r>this.b)
+      {
+        return `rgb(${(this.r+darken_by)%255}, ${this.g}, ${this.b})`;
+      }
+      else if(this.g>this.r&&this.g>this.b)
+      {
+        return `rgb(${this.r}, ${(this.g+darken_by)%255}, ${this.b})`;
+      }
+      else{
+        return `rgb(${this.r}, ${this.g}, ${(this.b+darken_by)%255})`;
+      }
+    }
+  }
+  function intrsctPt(slope1, slope2, line1, line2)
+  {
+    let c1 = getIntercept(slope1, line1);
+    let c2 = getIntercept(slope2, line2);
+    let x_cord = (c1-c2)/(slope1-slope2);
+    let y_cord = (slope1*Math.abs(x_cord))+c1;
+    (x_cord == Infinity)?(console.log(`slope1 = ${slope1}, slope2 = ${slope2}, m1-m2 = ${slope1-slope2}`)):1;
+   
+
+    return [Math.abs(x_cord), Math.abs(y_cord)];
+  }
+
+  function pts_dist(x1,y1,x2,y2)
+  {
+    
+    return Math.sqrt(((x1-x2)**2)+((y1-y2)**2));
+  }
+  function getIntercept(slope, line_cords)
+  {
+    return (line_cords[1]-(slope*line_cords[0]));
+  }
+  function platform_cords(x, y, ...sides)
+  {
+    let l, b, h;
+    if(arguments.length==3)
+      l=b=h=arguments[2];
+    else
+      {l=arguments[2];b=arguments[3];h=arguments[4];}
+
+    //calculating the hitbox
+    let nc0 = [x, y];
+    let nc1 = [nc0[0]-l*cos(30), nc0[1]-l*sin(30)];
+    let nc2 = [nc1[0]+b*cos(30), nc1[1]-b*sin(30)];
+    let nc3 = [nc2[0]+l*cos(30), nc2[1]+l*sin(30)];
+
+    return [nc0, nc1, nc2, nc3];
+  }
+  function cos(angle_in_deg)
+  {
+    return Math.cos((Math.PI*angle_in_deg)/180);
+  }
+  function sin(angle_in_deg)
+  {
+    return Math.sin((Math.PI*angle_in_deg)/180);
+  }
+
+  // let game={
+  //   start_game : ()=>{ game_var = setInterval(draw_frames, 16.6)},
+  //   stop_game : ()=>{ clearInterval(game_var)},
+  // }
+  "use strict";
+
+  function draw_cuboid(ctx_obj, ...dimens)
+  {
+    let x, y, l, b, h, color;
+    if(arguments.length==5) {x=arguments[2]; y=arguments[3]; l=b=h=arguments[1];color=arguments[4];}
+  
+    else {x=arguments[4]; y=arguments[5];l=arguments[1];b=arguments[2];h=arguments[3];color=arguments[6]}
+    //draw left part
+    ctx_obj.beginPath();
+    ctx_obj.moveTo(x, y);
+    ctx_obj.lineTo(x, y+h);
+    ctx_obj.moveTo(x, y);
+    let nx = x-l*cos(30), ny = y-l*sin(30);
+    ctx_obj.lineTo(nx, ny);
+    ctx_obj.lineTo(nx, ny+h);
+    ctx_obj.lineTo(x, y+h);
+    ctx_obj.fillStyle=color.darken(-110);
+    ctx_obj.fill();
+    ctx_obj.closePath();
+  
+    //draw right part
+    ctx_obj.beginPath();
+    ctx_obj.moveTo(x, y);
+    ctx_obj.lineTo(x, y+h);
+    ctx_obj.moveTo(x, y);
+    nx = x+b*cos(30), ny = y-b*sin(30);
+    ctx_obj.lineTo(nx, ny);
+    ctx_obj.lineTo(nx, ny+h);
+    ctx_obj.lineTo(x, y+h);
+    ctx_obj.fillStyle=color.darken(-55);
+    ctx_obj.fill();
+    ctx_obj.closePath();
+  
+    //draw upper part
+    ctx_obj.beginPath();
+    ctx_obj.moveTo(x, y);
+    nx = x-l*cos(30), ny = y-l*sin(30)
+    ctx_obj.lineTo(nx, ny);
+    nx = nx+b*cos(30), ny = ny-b*sin(30)
+    ctx_obj.lineTo(nx, ny);
+    nx = nx+l*cos(30), ny = ny+l*sin(30)
+    ctx_obj.lineTo(nx, ny);
+    ctx_obj.fillStyle=color.toString();
+    ctx_obj.fill();
+    ctx_obj.closePath();
+    ctx_obj.moveTo(0, 0);
+  }
+  
+  
+// dfgfgbfhjdnsmlw
 "use strict";
 let brd = document.getElementById("gme-ar");
 let game_over=false;

@@ -127,7 +127,11 @@ function color(r, g, b)
 let brd = document.getElementById("gme-ar");
 let game_over=false;
 brd.style.border="1px solid black";
-brd.addEventListener('click', ()=>{grow_stack()});
+brd.addEventListener('click', () => {
+  if (!game_over) {
+      grow_stack();
+  }
+});
 let ctx = brd.getContext("2d");
 let wobble_dist = 440, turn=1, score_stack = [], dist_cov=320, wobble_dir=+!+[], speed=5,stack_piece_height=20, stack_piece_length=200, stack_piece_breadth=200;
 let st = 0;
@@ -291,6 +295,7 @@ function draw_frames()
     wobble_dir = wobble_dir?+[]:+!+[];
   }
 }
+
 // brd.setAttribute('click', ()=>{/*spawn_piece();*/console.log("YAY")})
 game.start_game();
 posY-=stack_piece_height;

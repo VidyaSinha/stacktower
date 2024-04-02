@@ -1,35 +1,51 @@
-#score_div{
-	text-align: center;
+#score_div {
+    text-align: center;
     justify-content: center;
     padding: 10px;
-	height:30px;
-	width:20%;
-	margin-left:40%;
-	background-color:rgb(255, 255, 255);
+    height: 30px;
+    width: 20%;
+    margin-left: 40%;
+    background-color: rgb(255, 255, 255);
     border: 2px solid black;
 }
+
 #gme-ar {
     margin-left: 17%;
-    
-    background-color: rgba(255, 251, 201, 0.5); /* Adjust the alpha value (0.5 for 50% transparency) */
-    /* border: 2px solid black; */
-  
+    background-color: rgba(255, 255, 255, 0.5); /* Adjust the alpha value (0.5 for 50% transparency) */
 }
 
-
-h1{
-	text-align: center;
+h1 {
+    text-align: center;
     color: rgb(36, 60, 60);
-	/* background-color:rgb(216, 178, 178); */
     width: 500px;
-  margin-left: 35%;
-  /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-left: 35%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
 body {
     background-image: url(./bg.jpg);
-    background-size: contain; /* or 'cover' based on your preference */
-    background-repeat: repeat;
-    background-attachment: fixed;
+    background-size: cover; /* or 'cover' based on your preference */
+    background-repeat: no-repeat;
+    /* background-attachment: fixed; */
 }
+#restart-btn {
+    position: absolute;
+    top: calc(8% - 40px); /* Adjust the value to vertically center the button */
+    left: 75%; /* Position the button horizontally centered */
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: rgb(33, 28, 28);
+    color: rgb(255, 255, 255);
+    border: 2px solid rgb(193, 245, 246);
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#restart-btn:hover {
+    background-color: rgb(114, 114, 114);
+    color: rgb(255, 255, 255);
+}
+
 

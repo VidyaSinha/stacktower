@@ -176,9 +176,9 @@ function spawn_piece()
   let c1 = new color((Math.random()*1000)%255,(Math.random()*1000)%255,(Math.random()*1000)%255);
   console.log(`spawning at posX = ${posX}, posY = ${posY}`);
   stack.push(new stack_piece(stack_piece_length, stack_piece_breadth, stack_piece_height, posX, posY/*-((stack.length-1)*stack_piece_height)*/, c1));
-  // console.log(`New Piece Spawned at ${stack.slice(-1).pop().p}`)
+  console.log(`New Piece Spawned at ${stack.slice(-1).pop().p}`)
   dist_cov=220;
-  // console.log(`dist_cov = ${dist_cov}`);
+  console.log(`dist_cov = ${dist_cov}`);
   wobble_dir=1;
 }
 function grow_stack()
@@ -273,28 +273,54 @@ function grow_stack()
   game_over? score_div.innerHTML="<b>GAME OVER! Score : </b>"+(stack.length-1): score_div.innerHTML="<b>Score : </b>"+(stack.length-1);
   spawn_piece();
 
-}
+}function draw_frames() {
+  ctx.clearRect(0, 0, 1000, 600);
 
-function draw_frames()
-{
-  ctx.clearRect(+[], +[], 1000, 600);
-  for(let i=0; i<stack.length-1; i++)
-  {
-    stack[i].draw();
+  // Calculate total height of all stacks
+  let totalStackHeight = stack.length * stack_piece_height;
+
+  // Calculate the amount to shift the canvas vertically
+  let verticalShift = Math.max(0, totalStackHeight - 600);
+
+  // Draw existing stacks with adjusted positions
+  for (let i = 0; i < stack.length - 1; i++) {
+      stack[i].draw();
   }
+
+  // Draw current falling stack
   let piece = stack.slice(-1).pop();
-
-  let m = turn?piece.m[0]:piece.m[3];
-  piece.p += wobble_dir?speed*(Math.cos(Math.atan(m))):-(speed*(Math.cos(Math.atan(m))));
-  piece.q += wobble_dir?speed*(Math.sin(Math.atan(m))):-(speed*(Math.sin(Math.atan(m))));
+  let m = turn ? piece.m[0] : piece.m[3];
+  piece.p += wobble_dir ? speed * (Math.cos(Math.atan(m))) : -(speed * (Math.cos(Math.atan(m))));
+  piece.q += wobble_dir ? speed * (Math.sin(Math.atan(m))) : -(speed * (Math.sin(Math.atan(m))));
   piece.draw();
+
+  // Update distance covered
   dist_cov += speed;
-  if(dist_cov>wobble_dist)
-  {
-    dist_cov=+[];
-    wobble_dir = wobble_dir?+[]:+!+[];
+
+  // Toggle wobble direction
+  if (dist_cov > wobble_dist) {
+      dist_cov = 0;
+      wobble_dir = !wobble_dir;
   }
+
+  // Adjust canvas position
+  brd.style.top = -verticalShift + 'px';
 }
+
+const restartBtn = document.getElementById('restart-btn');
+// const highScoreDiv = document.getElementById('high-score');
+
+// Get high score from localStorage or set it to 0 if it doesn't exist
+// let highScore = localStorage.getItem('highScore') || 0;
+// console.log('Loaded High Score:', highScore);
+// highScoreDiv.textContent = `High Score: ${highScore}`;
+
+// Add click event listener to restart button
+restartBtn.addEventListener('click', () => {
+  location.reload(); // Reload the page
+});
+
+// Update high score function
 
 // brd.setAttribute('click', ()=>{/*spawn_piece();*/console.log("YAY")})
 game.start_game();

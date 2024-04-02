@@ -272,7 +272,7 @@ function grow_stack()
     }
   }
 
-  game_over? score_div.innerHTML="<b>GAME OVER! Score : </b>"+(stack.length-1): score_div.innerHTML="<b>Score : </b>"+(stack.length-1);
+  game_over? score_div.innerHTML="<b>GAME OVER!!Score : </b>"+(stack.length-1): score_div.innerHTML="<b>Score : </b>"+(stack.length-1);
   spawn_piece();
 
 }function draw_frames() {

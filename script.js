@@ -68,10 +68,7 @@ function color(r, g, b)
     return Math.sin((Math.PI*angle_in_deg)/180);
   }
 
-  // let game={
-  //   start_game : ()=>{ game_var = setInterval(draw_frames, 16.6)},
-  //   stop_game : ()=>{ clearInterval(game_var)},
-  // }
+
   "use strict";
 
   function draw_cuboid(ctx_obj, ...dimens)
@@ -121,8 +118,7 @@ function color(r, g, b)
     ctx_obj.moveTo(0, 0);
   }
   
-  
-// dfgfgbfhjdnsmlw
+
 "use strict";
 let brd = document.getElementById("gme-ar");
 let game_over=false;
@@ -203,11 +199,9 @@ function grow_stack()
     }
     if(top_h[0]-bott_h[0]<0)
     {
-      // console.log(`the top one is downwards slantwise`)
-      //the top one is downwards slantwise
-      // top's 3 and bottom's 0
+  
       cord_set_1 = intrsctPt(top.m[3], bott.m[0], [top_h[6], top_h[7]+stack_piece_height], [bott_h[0], bott_h[1]]);
-      //top's 1 and bottom's 0
+  
       cord_set_2 = intrsctPt(top.m[1], bott.m[0], [top_h[2], top_h[3]+stack_piece_height], [bott_h[0], bott_h[1]]);
       let new_brdt = pts_dist(...cord_set_1, top_h[6], top_h[7]+stack_piece_height);
 
@@ -218,11 +212,9 @@ function grow_stack()
 
     }
     else{
-      // console.log(`the top one is upwards slantwise`);
-      //the top one is upwards slantwise
-      // top's 3 and bottom's 2
+  
       cord_set_1 = intrsctPt(top.m[3], bott.m[2], [top_h[6], top_h[7]+stack_piece_height], [bott_h[4], bott_h[5]]);
-      // top's 1 and bottoms' 2
+     
       cord_set_2 = intrsctPt(top.m[1], bott.m[2], [top_h[2], top_h[3]+stack_piece_height], [bott_h[4], bott_h[5]]);
 
       let new_brdt = pts_dist(...cord_set_1, top_h[0], top_h[1]+stack_piece_height);
@@ -244,14 +236,13 @@ function grow_stack()
           game.stop_game();
 
       }
-    // console.log(`top_h[0]-bott_h[0] = ${top_h[0]-bott_h[0]}, top_h[1]-bott_h[1] = ${top_h[1]-bott_h[1]}`);
     if(top_h[0]-bott_h[0]>0)
     {
-      //top's 0 and bottom 3
+    
       cord_set_1 = intrsctPt(top.m[0], bott.m[3], [top_h[0], top_h[1]+stack_piece_height], [bott_h[6], bott_h[7]]);
-      //top's 2 and bottom 3
+ 
       cord_set_2 = intrsctPt(top.m[2], bott.m[3], [top_h[4], top_h[5]+stack_piece_height], [bott_h[6], bott_h[7]]);
-      //this only changes its length
+   
       let new_len = pts_dist(...cord_set_1, top_h[2], top_h[3]+stack_piece_height);
       top.l = (top.l<new_len||top.l==new_len)?top.l:new_len;
 
@@ -261,9 +252,9 @@ function grow_stack()
 
     }
     else{
-      //top's 0 and bottom 1
+      
       cord_set_1 = intrsctPt(top.m[0], bott.m[1], [top_h[0], top_h[1]+stack_piece_height], [bott_h[2], bott_h[3]]);
-      //top's 2 and bottom 1
+    
       cord_set_2 = intrsctPt(top.m[2], bott.m[1], [top_h[4], top_h[5]+stack_piece_height], [bott_h[2], bott_h[3]]);
       let new_len = pts_dist(...cord_set_1, top_h[0], top_h[1]+stack_piece_height);
       top.l = (new_len>top.l||top.l==new_len)?top.l:new_len;
@@ -278,53 +269,39 @@ function grow_stack()
 }function draw_frames() {
   ctx.clearRect(0, 0, 1000, 600);
 
-  // Calculate total height of all stacks
+ 
   let totalStackHeight = stack.length * stack_piece_height;
 
-  // Calculate the amount to shift the canvas vertically
+  
   let verticalShift = Math.max(0, totalStackHeight - 600);
 
-  // Draw existing stacks with adjusted positions
+ 
   for (let i = 0; i < stack.length - 1; i++) {
       stack[i].draw();
   }
 
-  // Draw current falling stack
   let piece = stack.slice(-1).pop();
   let m = turn ? piece.m[0] : piece.m[3];
   piece.p += wobble_dir ? speed * (Math.cos(Math.atan(m))) : -(speed * (Math.cos(Math.atan(m))));
   piece.q += wobble_dir ? speed * (Math.sin(Math.atan(m))) : -(speed * (Math.sin(Math.atan(m))));
   piece.draw();
 
-  // Update distance covered
   dist_cov += speed;
 
-  // Toggle wobble direction
   if (dist_cov > wobble_dist) {
       dist_cov = 0;
       wobble_dir = !wobble_dir;
   }
 
-  // Adjust canvas position
-  brd.style.top = -verticalShift + 'px';
 }
 
 const restartBtn = document.getElementById('restart-btn');
-// const highScoreDiv = document.getElementById('high-score');
 
-// Get high score from localStorage or set it to 0 if it doesn't exist
-// let highScore = localStorage.getItem('highScore') || 0;
-// console.log('Loaded High Score:', highScore);
-// highScoreDiv.textContent = `High Score: ${highScore}`;
-
-// Add click event listener to restart button
 restartBtn.addEventListener('click', () => {
-  location.reload(); // Reload the page
+  location.reload(); 
 });
 
-// Update high score function
 
-// brd.setAttribute('click', ()=>{/*spawn_piece();*/console.log("YAY")})
 game.start_game();
 posY-=stack_piece_height;
 spawn_piece();

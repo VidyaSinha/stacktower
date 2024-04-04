@@ -11,7 +11,7 @@
 
 #gme-ar {
     margin-left: 17%;
-    background-color: rgba(255, 255, 255, 0.5); /* Adjust the alpha value (0.5 for 50% transparency) */
+    background-color: rgba(255, 255, 255, 0.5); 
 }
 
 h1 {
@@ -24,14 +24,14 @@ h1 {
 
 body {
     background-image: url(./bg.jpg);
-    background-size: cover; /* or 'cover' based on your preference */
+    background-size: cover; 
     background-repeat: no-repeat;
-    /* background-attachment: fixed; */
+    
 }
 #restart-btn {
     position: absolute;
-    top: calc(8% - 40px); /* Adjust the value to vertically center the button */
-    left: 75%; /* Position the button horizontally centered */
+    top: calc(8% - 40px); 
+    left: 75%; 
     transform: translateX(-50%);
     padding: 10px 20px;
     font-size: 16px;
